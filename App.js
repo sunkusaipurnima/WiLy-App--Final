@@ -18,7 +18,7 @@ const App = (props) => {
 
   if (fontLoaded) {
     return (
-      <NavigationContainer>
+      <NavigationContainer independent={true}>
         <Stack.Navigator>
           <Stack.Screen
             name="SignIn"
