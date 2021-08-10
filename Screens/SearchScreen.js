@@ -15,7 +15,6 @@ import db from "../config";
 const SearchScreen = (props) => {
   const [allTransactions, setAllTransactions] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [searchTransactions, setSearchTransactions] = useState([]);
   const [lastTransaction, setLastTransaction] = useState(null);
 
   console.log("all transactions", allTransactions);
@@ -45,23 +44,7 @@ const SearchScreen = (props) => {
       });
   };
 
-  const fetchMoreTransactions = async () => {
-    var transactions = allTransactions;
-    db.collection("transactions")
-      .startAfter(lastTransaction)
-      .limit(2)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          transactions.push(doc.data());
-          setAllTransactions(transactions);
-          setLastTransaction(doc);
-        });
-      })
-      .catch((error) => {
-        console.log("error while getting additional transactions", error);
-      });
-  };
+  
 
   const handleSearch = () => {
     setAllTransactions("");
